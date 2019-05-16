@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+init({
+    size:10000,
+    storageBackend: AsyncStorage,
+})
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.handleMessage = this.handleMessage.bind(this);
+        this.state = {
+            message: '',
+        };
+    }
+
+    componentDidMount() {
+
+    }
+
+    handleMessage(e) {
+        this.setState({
+            message: e.target.value
+        });
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <p>Hello, MQTT</p>
+                <input onChange={this.handleMessage}/>
+
+                <button onClick={this.send.bind(this)}>
+                    SendMessage
+                </button>
+
+            </div>
+        );
+    }
 }
 
 export default App;
